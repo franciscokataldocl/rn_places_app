@@ -1,8 +1,10 @@
 import React , {useState } from "react";
-import { View, StyleSheet, Text, TextInput, Button, ScrollView} from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, ScrollView} from "react-native";
+
 import { useDispatch } from "react-redux";
-import { addPlace } from "../store/place.slice";
+import { savePlace, addPlace } from "../store/place.slice";
+import ImageSelector from '../components/ImageSelector';
+import colors from "../utils/colors";
 
 
 
@@ -19,30 +21,45 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input:{
-    borderBottomColor: Colors.black,
+    borderBottomColor: colors.black,
     borderBottomWidth:1,
     marginBottom: 20,
     padding:5
+  },
+  btnCamera:{
+    backgroundColor: colors.highlight,
+    paddingVertical: 15,
+    borderRadius:5,
+   
+  },
+  btnCameraText:{
+    color: colors.white,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
   }
 });
 
 const NewPlaceSreen = ({ navigation }) => {
 
 const dispatch = useDispatch();
+
 const [title, setTitle] = useState('');
+const [image, setImage] = useState('');
 
 const onHandleTitleChange = (text) =>{
   setTitle(text)
-
 }
 
 const onHandleSubmit = () =>{
-  dispatch(addPlace(title));
-  Navigation.navigate('Placce')
+ dispatch(savePlace(title, image));
+  navigation.navigate('Place')
 }
 
 
-
+const handleImageSelect = (imageUrl) =>{
+  setImage(imageUrl);
+}
 
   return (
     <ScrollView style={styles.container}>
@@ -54,11 +71,11 @@ const onHandleSubmit = () =>{
       value={title}
       onChangeText={onHandleTitleChange}
       />
-      <Button
-      title="Guardar dirección"
-      color={Colors.primary}
-      onPress={onHandleSubmit}
-      />
+      <ImageSelector onImage={handleImageSelect}/>
+    
+      <TouchableOpacity onPress={onHandleSubmit} style={styles.btnCamera}>
+        <Text style={styles.btnCameraText}>Guardar dirección</Text>
+      </TouchableOpacity>
       </View>
     </ScrollView>
   );
