@@ -5,12 +5,14 @@ import { useDispatch } from "react-redux";
 import { savePlace, addPlace } from "../store/place.slice";
 import ImageSelector from '../components/ImageSelector';
 import colors from "../utils/colors";
+import LocationSelector from '../components/LocationSelector';
 
 
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.black
   },
   content: {
     flex:1,
@@ -19,9 +21,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     marginBottom: 20,
+    color: colors.primary
   },
   input:{
-    borderBottomColor: colors.black,
+    borderBottomColor: colors.white,
     borderBottomWidth:1,
     marginBottom: 20,
     padding:5
@@ -46,6 +49,7 @@ const dispatch = useDispatch();
 
 const [title, setTitle] = useState('');
 const [image, setImage] = useState('');
+const [location, setLocation] = useState('');
 
 const onHandleTitleChange = (text) =>{
   setTitle(text)
@@ -57,8 +61,11 @@ const onHandleSubmit = () =>{
 }
 
 
-const handleImageSelect = (imageUrl) =>{
-  setImage(imageUrl);
+const handleImageSelect = (imageUrl) => setImage(imageUrl);
+
+
+const handleLocationSelect = (location) =>{
+setLocation(location)
 }
 
   return (
@@ -68,11 +75,12 @@ const handleImageSelect = (imageUrl) =>{
       <TextInput
       style={styles.input}
       placeholder="Nueva ubicación"
+      placeholderTextColor={colors.white}
       value={title}
       onChangeText={onHandleTitleChange}
       />
       <ImageSelector onImage={handleImageSelect}/>
-    
+      <LocationSelector onLocation={handleLocationSelect}/>
       <TouchableOpacity onPress={onHandleSubmit} style={styles.btnCamera}>
         <Text style={styles.btnCameraText}>Guardar dirección</Text>
       </TouchableOpacity>

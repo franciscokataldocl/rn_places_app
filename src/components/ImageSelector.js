@@ -23,13 +23,13 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   btnCamera:{
-    backgroundColor: colors.black,
+    backgroundColor: colors.white,
     paddingVertical: 15,
     borderRadius:5,
    
   },
   btnCameraText:{
-    color: colors.white,
+    color: colors.black,
     textAlign: 'center',
     fontWeight: 'bold',
     textTransform: 'uppercase',

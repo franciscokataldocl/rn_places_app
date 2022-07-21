@@ -2,11 +2,13 @@ import React from "react";
 import { View, StyleSheet, Text, FlatList } from "react-native";
 import { useSelector } from "react-redux";
 import PlaceItem from '../components/PlaceItem';
+import colors from "../utils/colors";
 
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.black
   },
   emptyContainer: {
     marginVertical:20,
@@ -15,6 +17,7 @@ const styles = StyleSheet.create({
   },
   emptyContainerText: {
     fontSize: 20,
+    color: colors.white
   },
   
 });
@@ -27,7 +30,7 @@ const onSelectPlace = (id)=>{
 }
 
 const renderItem = ({item}) =>(
-<PlaceItem {...item} onSelect={onSelectPlace}/>
+<PlaceItem {...item} address="123, calle, ciudad, pais" onSelect={onSelectPlace}/>
 )
 
 
