@@ -1,3 +1,5 @@
+/src/components/utils/maps.js
+
 # Xcode
 !**/*.xcodeproj
 !**/*.pbxproj
